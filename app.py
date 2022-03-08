@@ -8,7 +8,8 @@ import falcon
 import messages
 import middlewares
 from falcon_multipart.middleware import MultipartMiddleware
-from resources import account_resources, common_resources, user_resources, event_resources
+#from resources import account_resources, common_resources, user_resources, event_resources
+from resources import build_resources, card_resources, common_resources, session_resources
 from settings import configure_logging
 
 # LOGGING
@@ -31,8 +32,21 @@ app = application = falcon.API(
         MultipartMiddleware()
     ]
 )
-application.add_route("/", common_resources.ResourceHome())
 
+application.add_route("/", common_resources.ResourceHome())
+application.add_route("/populate", common_resources.ResourcePopulate())
+
+application.add_route("/cards", card_resources.Get())
+application.add_route("/cards/{card}", card_resources.Find())
+
+application.add_route("/builds/{build}", build_resources.Find())
+application.add_route("/builds", build_resources.Create())
+
+# Auth routes
+application.add_route("/session", session_resources.Create());
+application.add_route("/session/delete", session_resources.Delete());
+
+'''
 application.add_route("/account/profile", account_resources.ResourceAccountUserProfile())
 application.add_route("/account/profile/update_profile_image", account_resources.ResourceAccountUpdateProfileImage())
 application.add_route("/account/create_token", account_resources.ResourceCreateUserToken())
@@ -45,3 +59,4 @@ application.add_route("/events", event_resources.ResourceGetEvents())
 application.add_route("/events/show/{id:int}", event_resources.ResourceGetEvent())
 
 application.add_sink(handle_404, "")
+'''

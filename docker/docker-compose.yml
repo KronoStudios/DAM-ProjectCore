@@ -27,8 +27,8 @@ services:
     image: mysql:latest
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: root1234
-      MYSQL_DATABASE: dev-test
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: game_db
       MYSQL_USER: dev-user
       MYSQL_PASSWORD: 1234
 

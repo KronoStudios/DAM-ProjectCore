@@ -14,7 +14,7 @@ else:
 
 
 DB_PORT = "3306"
-DB_NAME = "dev-test"
+DB_NAME = "game_db"
 DB_USERNAME = "dev-user"
 DB_PASSWORD = "1234"
 DB_ENCODING = "utf8"
