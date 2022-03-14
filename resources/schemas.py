@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-SchemaUserToken = {
+SchemaToken = {
     "type": "object",
     "properties": {
         "token": {"type": "string"},
