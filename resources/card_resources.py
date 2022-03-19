@@ -15,14 +15,14 @@ from resources.base_resources import DAMCoreResource
 
 mylogger = logging.getLogger(__name__)
 
-@falcon.before(requires_auth)
+#@falcon.before(requires_auth)
 class Get(DAMCoreResource):
     def on_get(self, req, resp, *args, **kwargs):
         super(Get, self).on_get(req, resp, *args, **kwargs)
 
-        cards = []
+        cards = { "cards": [] }
         for c in self.db_session.query(Card).all():
-            cards.append(c.json_model) 
+            cards["cards"].append(c.json_model) 
 
         resp.media = cards
         resp.status = falcon.HTTP_200

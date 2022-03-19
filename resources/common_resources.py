@@ -31,7 +31,7 @@ class ResourcePopulate(DAMCoreResource):
 
         if self.db_session.query(Card).count() == 0:
             for i in range(100):
-                c = Card(name = fake.word(), description = fake.sentence(), java_class = "", image = "")
+                c = Card(name = fake.word(), description = fake.sentence(), java_class = "com.kronostudios.the_game.cards.Fireball", image = "")
                 self.db_session.add(c)
 
         if self.db_session.query(User).count() == 0:
