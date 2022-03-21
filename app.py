@@ -42,7 +42,6 @@ STATIC_PATH = pathlib.Path(__file__).parent / 'static'
 app.add_static_route('/static', str(STATIC_PATH))
 
 application.add_route("/", common_resources.ResourceHome())
-application.add_route("/populate", common_resources.ResourcePopulate())
 
 application.add_route("/cards", card_resources.Get())
 application.add_route("/cards/{card}", card_resources.Find())
@@ -60,6 +59,8 @@ register_swaggerui_app(
     favicon_url='https://falconframework.org/favicon-32x32.png',
     config={'supportedSubmitMethods': ['get'], }
 )
+
+application.add_sink(handle_404, "")
 
 '''
 application.add_route("/account/profile", account_resources.ResourceAccountUserProfile())
