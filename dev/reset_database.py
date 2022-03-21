@@ -9,7 +9,7 @@ from sqlalchemy.sql import text
 
 import db
 import settings
-from db.models import SQLAlchemyBase, User, GenereEnum, UserToken, Event, EventTypeEnum
+from db.models import SQLAlchemyBase
 from settings import DEFAULT_LANGUAGE
 
 # LOGGING
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     SQLAlchemyBase.metadata.create_all(db.DB_ENGINE)
 
 
-
+'''
     # -------------------- CREATE USERS --------------------
     mylogger.info("Creating default users...")
     # noinspection PyArgumentList
@@ -130,3 +130,4 @@ if __name__ == "__main__":
 
     db_session.commit()
     db_session.close()
+'''
