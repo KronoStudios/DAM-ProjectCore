@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "ae9bcfa3-3083-4365-a03e-32da83606eba",
+		"name": "DAMCore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Create session",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "coxalexandria",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8000/session",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"session"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cards",
+			"item": [
+				{
+					"name": "Get cards",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "6ab110cfd2b52e7edf33a43e4b7ddc5ae5bc15c599bd1ea3e1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8000/cards",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find card",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "6ab110cfd2b52e7edf33a43e4b7ddc5ae5bc15c599bd1ea3e1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8000/cards/101",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"cards",
+								"101"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Builds",
+			"item": [
+				{
+					"name": "Find build",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8000/builds/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"builds",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Other",
+			"item": [
+				{
+					"name": "Populate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8000/populate",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"populate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
