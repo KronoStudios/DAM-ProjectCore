@@ -1,0 +1,194 @@
+swagger: "2.0"
+info:
+  description: "Welcome, this is the API for our game. You can find out more about KronoStudios and the project at [our website](https://kronostudios.github.io/website)."
+  version: "1.0.0"
+  title: "KronoStudios API"
+  termsOfService: ""
+  contact:
+    email: "gpb7@alumnes.udl.cat"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8000"
+basePath: "/"
+tags:
+- name: "Cards"
+  description: "Card management"
+schemes:
+- "https"
+- "http"
+paths:
+  /cards:
+    get:
+      tags:
+      - "Cards"
+      summary: "Retrieves all the cards and their information."
+      description: ""
+      operationId: "getCards"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        type: "string"
+        name: "Authorization"
+        description: "Authorization token retrieved by the session function."
+        required: true
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Card"
+        "401":
+          description: "Unauthorized"
+  /cards/{cardId}:
+    get:
+      tags:
+      - "Cards"
+      summary: "Finds a card by their ID"
+      operationId: "findCard"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "cardId"
+        in: "path"
+        description: "ID to filter by"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Card"
+        "404":
+          description: "Card not found."
+  /builds/{buildId}:
+    get:
+      tags:
+      - "Builds"
+      summary: "Finds a build by their ID"
+      operationId: "findBuild"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "buildId"
+        in: "path"
+        description: "ID to filter by"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Build"
+        "404":
+          description: "Card not found."
+  /session:
+    post:
+      tags:
+      - "Users"
+      summary: "Creates a session token for the authenticated user."
+      description: ""
+      operationId: "createSession"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "401":
+          description: "Unauthorized - Invalid user"
+      security:
+        - basicAuth: []
+securityDefinitions:
+  basicAuth:
+    type: "basic"
+    name: "basicAuth"
+    in: "header"
+definitions:
+  Card:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      java_class:
+        type: "string"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      image:
+        type: "string"
+  Character:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      build_id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      stamina:
+        type: "integer"
+        format: "int32"
+      strength:
+        type: "integer"
+        format: "int32"
+      dexterity:
+        type: "integer"
+        format: "int32"
+      intellect:
+        type: "integer"
+        format: "int32"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      email:
+        type: "string"
+      rating:
+        type: "integer"
+        format: "int32"
+      scrap:
+        type: "integer"
+        format: "int32"
+      created_at:
+        type: "string"
+        format: "date-time"
+  BuildCard:
+    type: "object"
+    properties:
+      card:
+        $ref: "#/definitions/Card"
+      amount:
+        type: "integer"
+        format: "int32"
+  Build:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      user:
+        $ref: "#/definitions/User"
+      characters:
+        type: "array"
+        items:
+          $ref: "#/definitions/Character"
+      cards:
+        type: "array"
+        items:
+          $ref: "#/definitions/BuildCard"

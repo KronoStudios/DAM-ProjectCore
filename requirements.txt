@@ -6,4 +6,5 @@ gunicorn
 pymysql
 jsonschema
 falcon-multipart
+falcon-swagger-ui
 faker

@@ -4,6 +4,7 @@
 import logging.config
 
 import falcon
+import pathlib
 
 import messages
 import middlewares
@@ -11,6 +12,7 @@ from falcon_multipart.middleware import MultipartMiddleware
 #from resources import account_resources, common_resources, user_resources, event_resources
 from resources import build_resources, card_resources, common_resources, session_resources
 from settings import configure_logging
+from falcon_swagger_ui import register_swaggerui_app
 
 # LOGGING
 mylogger = logging.getLogger(__name__)
@@ -33,6 +35,12 @@ app = application = falcon.API(
     ]
 )
 
+SWAGGERUI_URL = '/swagger'  # without trailing slash
+SCHEMA_URL = '/static/swagger.json'
+STATIC_PATH = pathlib.Path(__file__).parent / 'static'
+
+app.add_static_route('/static', str(STATIC_PATH))
+
 application.add_route("/", common_resources.ResourceHome())
 application.add_route("/populate", common_resources.ResourcePopulate())
 
@@ -45,6 +53,13 @@ application.add_route("/builds", build_resources.Create())
 # Auth routes
 application.add_route("/session", session_resources.Create());
 application.add_route("/session/delete", session_resources.Delete());
+
+register_swaggerui_app(
+    app, SWAGGERUI_URL, SCHEMA_URL,
+    page_title='UI',
+    favicon_url='https://falconframework.org/favicon-32x32.png',
+    config={'supportedSubmitMethods': ['get'], }
+)
 
 '''
 application.add_route("/account/profile", account_resources.ResourceAccountUserProfile())
