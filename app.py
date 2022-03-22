@@ -41,7 +41,7 @@ STATIC_PATH = pathlib.Path(__file__).parent / 'static'
 
 app.add_static_route('/static', str(STATIC_PATH))
 
-# application.add_route("/", common_resources.ResourceHome())
+application.add_route("/", common_resources.ResourceHome())
 
 application.add_route("/cards", card_resources.Get())
 application.add_route("/cards/{card}", card_resources.Find())
