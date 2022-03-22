@@ -15,7 +15,7 @@ from resources.base_resources import DAMCoreResource
 
 mylogger = logging.getLogger(__name__)
 
-#@falcon.before(requires_auth)
+# @falcon.before(requires_auth)
 class Get(DAMCoreResource):
     def on_get(self, req, resp, *args, **kwargs):
         super(Get, self).on_get(req, resp, *args, **kwargs)
@@ -27,6 +27,7 @@ class Get(DAMCoreResource):
         resp.media = cards
         resp.status = falcon.HTTP_200
 
+# @falcon.before(requires_auth)
 class Find(DAMCoreResource):
     def on_get(self, req, resp, *args, **kwargs):
         super(Find, self).on_get(req, resp, *args, **kwargs)

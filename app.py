@@ -27,7 +27,7 @@ def handle_404(req, resp):
 
 
 # FALCON
-app = application = falcon.API(
+application = app = falcon.API(
     middleware=[
         middlewares.DBSessionManager(),
         middlewares.Falconi18n(),
@@ -35,11 +35,13 @@ app = application = falcon.API(
     ]
 )
 
+# application.add_sink(handle_404, "")
+
 SWAGGERUI_URL = '/ui'  # without trailing slash
 SCHEMA_URL = '/static/swagger.json'
 STATIC_PATH = pathlib.Path(__file__).parent / 'static'
 
-app.add_static_route('/static', str(STATIC_PATH))
+application.add_static_route('/static', str(STATIC_PATH))
 
 application.add_route("/", common_resources.ResourceHome())
 
@@ -53,14 +55,14 @@ application.add_route("/builds", build_resources.Create())
 application.add_route("/session", session_resources.Create());
 application.add_route("/session/delete", session_resources.Delete());
 
+
 register_swaggerui_app(
-    app, SWAGGERUI_URL, SCHEMA_URL,
+    application, SWAGGERUI_URL, SCHEMA_URL,
     page_title='UI',
     favicon_url='https://falconframework.org/favicon-32x32.png',
     config={'supportedSubmitMethods': ['get'], }
 )
 
-# application.add_sink(handle_404, "")
 
 '''
 application.add_route("/account/profile", account_resources.ResourceAccountUserProfile())
