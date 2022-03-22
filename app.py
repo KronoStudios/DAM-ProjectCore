@@ -35,13 +35,13 @@ app = application = falcon.API(
     ]
 )
 
-SWAGGERUI_URL = '/swagger'  # without trailing slash
+SWAGGERUI_URL = '/ui'  # without trailing slash
 SCHEMA_URL = '/static/swagger.json'
 STATIC_PATH = pathlib.Path(__file__).parent / 'static'
 
 app.add_static_route('/static', str(STATIC_PATH))
 
-application.add_route("/", common_resources.ResourceHome())
+# application.add_route("/", common_resources.ResourceHome())
 
 application.add_route("/cards", card_resources.Get())
 application.add_route("/cards/{card}", card_resources.Find())
@@ -60,7 +60,7 @@ register_swaggerui_app(
     config={'supportedSubmitMethods': ['get'], }
 )
 
-application.add_sink(handle_404, "")
+# application.add_sink(handle_404, "")
 
 '''
 application.add_route("/account/profile", account_resources.ResourceAccountUserProfile())
