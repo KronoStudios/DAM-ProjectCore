@@ -48,3 +48,17 @@ $ docker-compose down                          #Stop
 - POST /users/register
 - [A] GET /users/show/{username:str}
 
+###  Data Model	
+
+Nuestro modelo consiste de varias tablas donde almacenamos los datos.
+<br>
+Primero tenemos la tabla users, con un numero identificador, sus datos de login, fecha de creación y su rating.
+<br>
+La tabla tokens, ligada a users, almacenará los logins.
+<br>
+La tabla builds es una relación 1..n de users, que luego se relaciona con build_card y characters.
+<br>
+Por último, la tabla cards, que representan cada carta en el juego, con su nombre, descripción e imagen, y la clase de java que ejecuta su efecto.
+<br>
+<br>
+![DIAGRAMA](https://i.imgur.com/3z8Le4a.png)
