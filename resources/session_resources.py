@@ -15,7 +15,7 @@ from db.models import User, Token
 from hooks import requires_auth
 from resources import utils
 from resources.base_resources import DAMCoreResource
-from resources.schemas import SchemaToken
+from resources.schemas import SchemaUserToken
 from settings import STATIC_DIRECTORY
 
 mylogger = logging.getLogger(__name__)
@@ -53,7 +53,7 @@ class Create(DAMCoreResource):
 
 @falcon.before(requires_auth)
 class Delete(DAMCoreResource):
-    @jsonschema.validate(SchemaToken)
+    @jsonschema.validate(SchemaUserToken)
     def on_post(self, req, resp, *args, **kwargs):
         super(Delete, self).on_post(req, resp, *args, **kwargs)
 

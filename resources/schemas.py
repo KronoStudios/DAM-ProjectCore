@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-SchemaToken = {
+SchemaUserToken = {
     "type": "object",
     "properties": {
         "token": {"type": "string"},
@@ -15,9 +15,7 @@ SchemaRegisterUser = {
         "username": {"type": "string"},
         "password": {"type": "string"},
         "email": {"type": "string"},
-        "name": {"type": "string"},
-        "surname": {"type": "string"},
-        "genere": {"type": "string"}
+        "name": {"type": "string"}
     },
-    "required": ["username", "password", "email", "name", "surname", "genere"]
+    "required": ["username", "password", "email", "name"]
 }
