@@ -66,3 +66,26 @@ class FindGameListByUser(DAMCoreResource):
 
         resp.media = games
         resp.status = falcon.HTTP_200
+        
+# @falcon.before(requires_auth) 
+class ResourceRegisterGame(DAMCoreResource):
+    @jsonschema.validate(SchemaRegisterGame)
+    def on_post(self, req, resp, *args, **kwargs):
+        super(ResourceRegisterUser, self).on_post(req, resp, *args, **kwargs)
+
+        try:
+            print(req.media)
+            
+            aux_game = Game(user1_id = req.user1_id, user2_id = req.user2_id, user_winner_id = req.user_winner_id)
+            
+            self.db_session.add(aux_game)
+
+            try:
+                self.db_session.commit()
+            except IntegrityError:
+                raise falcon.HTTPBadRequest(description=messages.user_exists)
+
+        except KeyError:
+            raise falcon.HTTPBadRequest(description=messages.parameters_invalid)
+
+        resp.status = falcon.HTTP_200
