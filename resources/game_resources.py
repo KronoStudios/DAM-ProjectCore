@@ -72,7 +72,7 @@ class FindGameListByUser(DAMCoreResource):
 class ResourceRegisterGame(DAMCoreResource):
     @jsonschema.validate(SchemaRegisterGame)
     def on_post(self, req, resp, *args, **kwargs):
-        super(ResourceRegisterUser, self).on_post(req, resp, *args, **kwargs)
+        super(ResourceRegisterGame, self).on_post(req, resp, *args, **kwargs)
 
         try:
             print(req.media)
@@ -84,7 +84,7 @@ class ResourceRegisterGame(DAMCoreResource):
             try:
                 self.db_session.commit()
             except IntegrityError:
-                raise falcon.HTTPBadRequest(description=messages.user_exists)
+                raise falcon.HTTPBadRequest(description=messages.game_exists)
 
         except KeyError:
             raise falcon.HTTPBadRequest(description=messages.parameters_invalid)
