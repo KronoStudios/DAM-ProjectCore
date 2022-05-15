@@ -12,6 +12,7 @@ from hooks import requires_auth
 
 import messages
 from resources.base_resources import DAMCoreResource
+from resources.schemas import SchemaRegisterGame
 
 mylogger = logging.getLogger(__name__)
 
