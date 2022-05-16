@@ -65,8 +65,13 @@ class FindGameListByUser(DAMCoreResource):
     def on_get(self, req, resp, *args, **kwargs):
         super(FindGameListByUser, self).on_get(req, resp, *args, **kwargs)
 
+        u = kwargs["user"]
+        print("ojo k ve user")
+        print(u)
+
         games = { "games": [] }
-        for c in self.db_session.query(Game).filter(Game.user1_id == kwargs["user"] or Game.user2_id == kwargs["user"]):
+        #for c in self.db_session.query(Game).filter(Game.user1_id == kwargs["user"] or Game.user2_id == kwargs["user"]):
+        for c in self.db_session.query(Game).filter(true):
             games["games"].append(c.json_model) 
 
         resp.media = games
