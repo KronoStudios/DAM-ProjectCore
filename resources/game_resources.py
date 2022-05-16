@@ -85,9 +85,9 @@ class ResourceRegisterGame(DAMCoreResource):
             
             game = Game()
         
-            game.user1_id = req.user1_id
-            game.user2_id = req.user2_id
-            game.user_winner_id = req.user_winner_id
+            game.user1_id = req.media["user1_id"]
+            game.user2_id = req.media["user2_id"]
+            game.user_winner_id = req.media["user_winner_id"]
             
             self.db_session.add(game)
 
