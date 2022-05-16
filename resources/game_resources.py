@@ -68,7 +68,7 @@ class FindGameListByUser(DAMCoreResource):
         resp.media = games
         resp.status = falcon.HTTP_200
         
-# @falcon.before(requires_auth) 
+# @falcon.before(requires_auth)
 class ResourceRegisterGame(DAMCoreResource):
     #@jsonschema.validate(SchemaRegisterGame)
     def on_post(self, req, resp, *args, **kwargs):
