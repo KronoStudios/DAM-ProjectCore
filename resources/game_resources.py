@@ -63,7 +63,7 @@ class Create(DAMCoreResource):
 # @falcon.before(requires_auth)
 class FindGameListByUser(DAMCoreResource):
     def on_get(self, req, resp, *args, **kwargs):
-        super(Find, self).on_get(req, resp, *args, **kwargs)
+        super(FindGameListByUser, self).on_get(req, resp, *args, **kwargs)
 
         games = { "games": [] }
         for c in self.db_session.query(Game).filter(Game.user1_id == kwargs["user"] or Game.user2_id == kwargs["user"]):
