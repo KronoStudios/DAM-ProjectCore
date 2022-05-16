@@ -46,7 +46,12 @@ class Find(DAMCoreResource):
 class Create(DAMCoreResource):
     def on_get(self, req, resp, *args, **kwargs):
         super(Get, self).on_get(req, resp, *args, **kwargs)
-        game = Game(user1_id = req.user1_id, user2_id = req.user2_id, user_winner_id = req.user_winner_id)
+        #game = Game(user1_id = req.user1_id, user2_id = req.user2_id, user_winner_id = req.user_winner_id)
+        game = Game()
+        
+        game.user1_id = req.user1_id
+        game.user2_id = req.user2_id
+        game.user_winner_id = req.user_winner_id
         
         self.db_session.add(game)
         self.db_session.commit()
