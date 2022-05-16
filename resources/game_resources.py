@@ -3,13 +3,12 @@
 
 import logging
 
-from db.models import Card
+from db.models import Game
 
 import falcon
 from sqlalchemy.orm import joinedload
 from sqlalchemy.orm.exc import NoResultFound
 from hooks import requires_auth
-
 import messages
 from resources.base_resources import DAMCoreResource
 from resources.schemas import SchemaRegisterGame
@@ -82,9 +81,15 @@ class ResourceRegisterGame(DAMCoreResource):
         try:
             print(req.media)
             
-            aux_game = Game(user1_id = req.user1_id, user2_id = req.user2_id, user_winner_id = req.user_winner_id)
+            #aux_game = Game(user1_id = req.user1_id, user2_id = req.user2_id, user_winner_id = req.user_winner_id)
             
-            self.db_session.add(aux_game)
+            game = Game()
+        
+            game.user1_id = req.user1_id
+            game.user2_id = req.user2_id
+            game.user_winner_id = req.user_winner_id
+            
+            self.db_session.add(game)
 
             try:
                 self.db_session.commit()
