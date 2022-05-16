@@ -50,7 +50,7 @@ application.add_route("/cards/{card}", card_resources.Find())
 
 application.add_route("/games", game_resources.Get())
 application.add_route("/games", game_resources.ResourceRegisterGame())
-#application.add_route("/games/{user}", game_resources.Find())
+application.add_route("/games/{user}", game_resources.FindGameListByUser())
 
 
 application.add_route("/builds/{build}", build_resources.Find())
