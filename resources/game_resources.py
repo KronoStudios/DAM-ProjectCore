@@ -68,6 +68,8 @@ class FindGameListByUser(DAMCoreResource):
         u = kwargs["user"]
         print("ojo k ve user")
         print(u)
+        allgames = self.db_session.query(Game).all()
+        print(allgames)
 
         games = { "games": [] }
         #for c in self.db_session.query(Game).filter(Game.user1_id == kwargs["user"] or Game.user2_id == kwargs["user"]):
