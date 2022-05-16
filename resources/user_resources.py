@@ -33,7 +33,7 @@ class ResourceGetUserProfile(DAMCoreResource):
 
 
 class ResourceRegisterUser(DAMCoreResource):
-    @jsonschema.validate(SchemaRegisterUser)
+    #@jsonschema.validate(SchemaRegisterUser)
     def on_post(self, req, resp, *args, **kwargs):
         super(ResourceRegisterUser, self).on_post(req, resp, *args, **kwargs)
 

@@ -70,7 +70,7 @@ class FindGameListByUser(DAMCoreResource):
         
 # @falcon.before(requires_auth) 
 class ResourceRegisterGame(DAMCoreResource):
-    @jsonschema.validate(SchemaRegisterGame)
+    #@jsonschema.validate(SchemaRegisterGame)
     def on_post(self, req, resp, *args, **kwargs):
         super(ResourceRegisterGame, self).on_post(req, resp, *args, **kwargs)
 
