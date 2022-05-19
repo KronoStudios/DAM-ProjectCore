@@ -21,6 +21,7 @@ class Get(DAMCoreResource):
         super(Get, self).on_get(req, resp, *args, **kwargs)
 
         cards = { "cards": [] }
+        
         for c in self.db_session.query(Card).all():
             cards["cards"].append(c.json_model) 
 
@@ -70,6 +71,11 @@ class FindGameListByUser(DAMCoreResource):
         print(u)
         allgames = self.db_session.query(Game).all()
         print(allgames)
+
+        allcards = self.db_session.query(Card).all()
+        print("allcards ==")
+        print(allcards)
+
 
         games = { "games": [] }
         #for c in self.db_session.query(Game).filter(Game.user1_id == kwargs["user"] or Game.user2_id == kwargs["user"]):
