@@ -67,22 +67,17 @@ class FindGameListByUser(DAMCoreResource):
         super(FindGameListByUser, self).on_get(req, resp, *args, **kwargs)
 
         u = kwargs["user"]
-        print("ojo k ve user!!")
-        print(u)
-        allgames = self.db_session.query(Game).all()
-        print(allgames)
 
-        allcards = self.db_session.query(Card).all()
-        print("allcards ==")
-        print(allcards)
+        arr = []
+        for c in self.db_session.query(Game).filter( (Game.user1_id == u)):
+            arr.append(c.json_model) 
 
-
-        games = { "games": [] }
-        #for c in self.db_session.query(Game).filter(Game.user1_id == kwargs["user"] or Game.user2_id == kwargs["user"]):
-        for c in self.db_session.query(Game).all():
-            #if c.user1_id == u:
-                #games["games"].append(c.json_model) 
-            games["games"].append(c.json_model) 
+        #fem 2 for's, per que per alguna raó no ens deixava posar dues condicions dins el filter()
+        for c in self.db_session.query(Game).filter( (Game.user2_id == u)):
+            arr.append(c.json_model) 
+ 
+        arr = sorted(arr, key=lambda x : x['played_at'], reverse=True)
+        games = { "games": arr }
 
         resp.media = games
         resp.status = falcon.HTTP_200

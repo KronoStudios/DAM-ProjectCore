@@ -223,8 +223,8 @@ class Game(SQLAlchemyBase, JSONModel):
 
         return {
             "id": self.id,
-            "user1": self.user1.json_model,
-            "user2": self.user2.json_model,
-            "userwin": self.userWinner.json_model,
-            "timestamp": self.played_at,
+            "user_1": self.user1.json_model,
+            "user_2": self.user2.json_model,
+            "user_winner": self.userWinner.json_model,
+            "played_at": str(self.played_at)
         }
