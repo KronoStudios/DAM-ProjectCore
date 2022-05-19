@@ -66,7 +66,7 @@ class FindGameListByUser(DAMCoreResource):
         super(FindGameListByUser, self).on_get(req, resp, *args, **kwargs)
 
         u = kwargs["user"]
-        print("ojo k ve user")
+        print("ojo k ve user!!")
         print(u)
         allgames = self.db_session.query(Game).all()
         print(allgames)
