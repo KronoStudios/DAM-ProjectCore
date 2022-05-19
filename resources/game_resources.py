@@ -69,12 +69,10 @@ class FindGameListByUser(DAMCoreResource):
         u = kwargs["user"]
         print("ojo k ve user!!")
         print(u)
+        
         allgames = self.db_session.query(Game).all()
+        print("allgames ==")
         print(allgames)
-
-        allcards = self.db_session.query(Card).all()
-        print("allcards ==")
-        print(allcards)
 
 
         games = { "games": [] }
