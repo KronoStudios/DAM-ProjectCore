@@ -3,7 +3,7 @@
 
 import logging
 
-from db.models import Game
+from db.models import Game, User, Token
 
 import falcon
 from sqlalchemy.orm import joinedload
@@ -66,14 +66,17 @@ class FindGameListByUser(DAMCoreResource):
     def on_get(self, req, resp, *args, **kwargs):
         super(FindGameListByUser, self).on_get(req, resp, *args, **kwargs)
 
-        u = kwargs["user"]
+        token = req.get_header("Authorization")
+
+        current_user = self.db_session.query(Token).filter(Token.token == token).one_or_none()
+        userid = current_user.user_id
 
         arr = []
-        for c in self.db_session.query(Game).filter( (Game.user1_id == u)):
+        for c in self.db_session.query(Game).filter( (Game.user1_id == userid)):
             arr.append(c.json_model) 
 
         #fem 2 for's, per que per alguna raó no ens deixava posar dues condicions dins el filter()
-        for c in self.db_session.query(Game).filter( (Game.user2_id == u)):
+        for c in self.db_session.query(Game).filter( (Game.user2_id == userid)):
             arr.append(c.json_model) 
  
         arr = sorted(arr, key=lambda x : x['played_at'], reverse=True)
