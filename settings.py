@@ -32,7 +32,7 @@ TIME_DEFAULT_FORMAT = "%H:%M:%S"
 DATETIME_DEFAULT_FORMAT = "{date} {time}".format(date=DATE_DEFAULT_FORMAT, time=TIME_DEFAULT_FORMAT)
 
 # Misc settings
-MAX_USER_TOKENS = 5
+MAX_USER_TOKENS = 50
 
 # Static files settings
 STATIC_HOSTNAME = "127.0.0.1:8001"

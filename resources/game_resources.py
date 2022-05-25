@@ -68,6 +68,7 @@ class FindGameListByUser(DAMCoreResource):
 
         token = req.get_header("Authorization")
 
+        print(token)
         current_user = self.db_session.query(Token).filter(Token.token == token).one_or_none()
         userid = current_user.user_id
 
