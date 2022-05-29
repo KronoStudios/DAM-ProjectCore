@@ -49,9 +49,24 @@ class Create(DAMCoreResource):
         #game = Game(user1_id = req.user1_id, user2_id = req.user2_id, user_winner_id = req.user_winner_id)
         game = Game()
         
-        game.user1_id = req.user1_id
+        #user1_id is now a token
+        token = req.user1_id
+        print("token==" + str(token))
+        current_user = self.db_session.query(Token).filter(Token.token == token).one_or_none()
+        print("current_user.user_id==" + str(current_user.user_id))
+        user1id = current_user.user_id
+
+        game.user1_id = user1id
         game.user2_id = req.user2_id
-        game.user_winner_id = req.user_winner_id
+        print("game.user2_id==" + str(game.user2_id))
+        
+        #calculate user_winner_id
+        if req.user_winner_id == 1:
+            game.user_winner_id = game.user1_id
+        else:
+            game.user_winner_id = game.user2_id
+
+        print("game.user_winner_id==" + str(game.user_winner_id))
         
         self.db_session.add(game)
         self.db_session.commit()
@@ -98,10 +113,24 @@ class ResourceRegisterGame(DAMCoreResource):
             #aux_game = Game(user1_id = req.user1_id, user2_id = req.user2_id, user_winner_id = req.user_winner_id)
             
             game = Game()
-        
-            game.user1_id = req.media["user1_id"]
+
+
+
+            #user1_id is now a token
+            token = req.media["user1_id"]
+            current_user = self.db_session.query(Token).filter(Token.token == token).one_or_none()
+            user1id = current_user.user_id
+
+            game.user1_id = user1id
             game.user2_id = req.media["user2_id"]
-            game.user_winner_id = req.media["user_winner_id"]
+            
+            #calculate user_winner_id
+            if req.media["user_winner_id"] == '1':
+                game.user_winner_id = game.user1_id
+            else:
+                game.user_winner_id = game.user2_id
+
+            print("game.user_winner_id==" + str(game.user_winner_id))
             
             self.db_session.add(game)
 
